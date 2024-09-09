@@ -1,24 +1,13 @@
-import { FC, useEffect, useState } from "react";
-import axios from "axios";
+import { FC } from "react";
 import styles from "../styles/style.module.css";
+import useClock from "../hooks/useClock";
 
 interface Props {
   withRefetch?: Boolean;
 }
+
 const Clock: FC<Props> = ({ withRefetch }) => {
-  const [clock, setClock] = useState("");
-  const refetch = () => {
-    axios
-      .request<{ data: string }>({
-        method: "GET",
-        url: "/clock",
-      })
-      .then((res) => setClock(res.data.data))
-      .catch((err) => console.log(err));
-  };
-  useEffect(() => {
-    refetch();
-  }, []);
+  const { clock, refetch } = useClock();
 
   if (!withRefetch) {
     return <kbd>{clock}</kbd>;
