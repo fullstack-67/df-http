@@ -1,12 +1,17 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/style.module.css";
+import useGlobalStore from "../stores/useGlobalStore";
 
 interface Props {
   withRefetch?: Boolean;
+  initialFetch?: Boolean;
 }
-const Clock: FC<Props> = ({ withRefetch }) => {
-  const [clock, setClock] = useState("");
+const Clock: FC<Props> = ({ withRefetch, initialFetch }) => {
+  const [clock, setClock] = useGlobalStore((state) => [
+    state.clock,
+    state.setClock,
+  ]);
   const refetch = () => {
     axios
       .request<{ data: string }>({
@@ -17,7 +22,7 @@ const Clock: FC<Props> = ({ withRefetch }) => {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-    refetch();
+    if (initialFetch) refetch();
   }, []);
 
   if (!withRefetch) {
