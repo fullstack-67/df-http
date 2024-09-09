@@ -1,6 +1,11 @@
 import { FC } from "react";
 import Clock from "./Clock";
-const Nav: FC = () => {
+
+interface Props {
+  clock: string;
+}
+
+const Nav: FC<Props> = ({ clock }) => {
   return (
     <header style={{ padding: "1rem 0" }}>
       <nav>
@@ -13,7 +18,7 @@ const Nav: FC = () => {
         </ul>
         <ul>
           <li>
-            <Clock />
+            <Clock clock={clock} />
           </li>
         </ul>
       </nav>

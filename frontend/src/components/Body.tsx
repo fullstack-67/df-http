@@ -1,15 +1,20 @@
 import { FC } from "react";
 import Clock from "./Clock";
-const Body: FC = () => {
+
+interface Props {
+  clock: string;
+  refetch: () => void;
+}
+const Body: FC<Props> = ({ clock, refetch }) => {
   return (
     <main style={{ padding: "1rem 0" }}>
-      <h1>useEffect</h1>
-      <Clock withRefetch={true} />
-      <Clock withRefetch={true} />
-      <Clock withRefetch={true} />
-      <Clock withRefetch={true} />
-      <Clock withRefetch={true} />
-      <Clock withRefetch={true} />
+      <h1>Prop Drilling</h1>
+      <Clock withRefetch={true} clock={clock} refetch={refetch} />
+      <Clock withRefetch={true} clock={clock} />
+      <Clock withRefetch={true} clock={clock} />
+      <Clock withRefetch={true} clock={clock} />
+      <Clock withRefetch={true} clock={clock} />
+      <Clock withRefetch={true} clock={clock} />
     </main>
   );
 };
