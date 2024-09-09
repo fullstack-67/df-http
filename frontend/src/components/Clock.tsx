@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import axios from "axios";
+import styles from "../styles/style.module.css";
 
 interface Props {
   withRefetch?: Boolean;
@@ -23,18 +24,11 @@ const Clock: FC<Props> = ({ withRefetch }) => {
     return <kbd>{clock}</kbd>;
   } else {
     return (
-      <article
-        className="grid"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <strong>{clock}</strong>
-        <button onClick={() => refetch()}>
-          <small>Reset</small>
-        </button>
+      <article>
+        <div className={styles.clockWrapper}>
+          <span className={styles.clockText}>{clock}</span>
+          <button onClick={() => refetch()}>Refetch</button>
+        </div>
       </article>
     );
   }
